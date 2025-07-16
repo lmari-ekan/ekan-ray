@@ -15,10 +15,10 @@ function createWindow() {
   const window = new BrowserWindow({
     width,
     height,
-    frame: false, // alterar para true se quiser a barra de título nativa
     show: true,
     resizable: true,
     fullscreenable: true,
+    autoHideMenuBar: true,
     webPreferences: {
       preload: join(__dirname, 'preload.js')
     }

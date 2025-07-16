@@ -139,3 +139,28 @@
 .sf-dump-search-wrapper * {
   box-sizing: border-box;
 }
+
+/* --- Scrollbar  --- */
+body::-webkit-scrollbar {
+  width: 12px;
+}
+
+body::-webkit-scrollbar-track {
+  background: #0f172a; 
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: #334155; 
+  border-radius: 6px;
+  border: 2px solid #0f172a; 
+  transition: background-color 0.2s ease;
+}
+
+body::-webkit-scrollbar-thumb:hover {
+  background-color: #475569; 
+}
+
+body {
+  scrollbar-width: thin;
+  scrollbar-color: #334155 #0f172a;
+}
