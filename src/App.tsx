@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import './style/global.css';
 import { motion } from 'framer-motion';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 interface RayPayloadContent {
   content: any;
@@ -111,6 +113,7 @@ function App() {
 
   const clearMessages = () => {
     setMessages([]);
+    toast.success('Messages cleared!');
   };
 
   return (
@@ -188,6 +191,18 @@ function App() {
           ))}
         </div>
       </main>
+      <ToastContainer 
+        position="bottom-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
     </div>
   );
 }

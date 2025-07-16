@@ -12,7 +12,7 @@ export function startRayServer() {
 
   wss.on('connection', (ws) => {
     clients.push(ws);
-    console.log('🧩 Cliente React conectado via WS');
+    console.log('🧩 React client connected via WS');
 
     ws.on('close', () => {
       clients = clients.filter(c => c !== ws);
@@ -38,9 +38,8 @@ export function startRayServer() {
           const json = JSON.parse(body);
           const message = JSON.stringify(json, null, 2);
 
-          console.log('📥 Ray PHP enviou:\n', message);
+          console.log('📥 Ray PHP sent:\n', message);
 
-          // envia para React via WS
           clients.forEach(ws => {
             if (ws.readyState === WebSocket.OPEN) {
               ws.send(message);
@@ -50,8 +49,8 @@ export function startRayServer() {
           res.writeHead(200);
           res.end();
         } catch (err: any) {
-          console.error('❌ JSON inválido:', err.message);
-          console.log('📦 Conteúdo bruto:', body);
+          console.error('❌ Invalid Json:', err.message);
+          console.log('📦 Raw Content:', body);
           res.writeHead(400);
           res.end();
         }
@@ -65,7 +64,7 @@ export function startRayServer() {
   });
 
   server.listen(PORT_HTTP, HOST, () => {
-    console.log(`🚀 Ray HTTP escutando em http://${HOST}:${PORT_HTTP}`);
-    console.log(`🌐 WebSocket ativo em ws://localhost:${PORT_WS}`);
+    console.log(`🚀 Ray HTTP server running at http://${HOST}:${PORT_HTTP}`);
+    console.log(`🌐 WebSocket active at ws://localhost:${PORT_WS}`);
   });
 }

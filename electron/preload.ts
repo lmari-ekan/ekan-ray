@@ -150,6 +150,7 @@ domReady().then(appendLoading);
 declare global {
   interface Window {
     Main: typeof api;
+    Sfdump?: (id: string) => void;
     ipcRenderer: typeof ipcRenderer;
   }
 }
