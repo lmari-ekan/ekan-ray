@@ -113,7 +113,7 @@ function App() {
 
   const clearMessages = () => {
     setMessages([]);
-    toast.success('Messages cleared!');
+    toast.success('Logs cleared!');
   };
 
   return (
