@@ -52,7 +52,8 @@ function DumpHtml({ html, id }: { html: string; id: string }) {
 
 function App() {
   const [messages, setMessages] = useState<RayMessage[]>([]);
-
+  const [inspectedPayload, setInspectedPayload] = useState<RayMessage | null>(null);
+  
   useEffect(() => {
     const socket = new WebSocket('ws://localhost:8080');
 
@@ -143,6 +144,13 @@ function App() {
             >
               <div className="mb-2 text-sm text-[#999] select-text">
                 <strong>UUID:</strong> {msg.uuid || '—'}
+                <button
+                  onClick={() => setInspectedPayload(msg)}
+                  title="Inspect Payload"
+                  className="ml-4 bg-[#00ffd1] text-black px-3 py-1 rounded-full hover:bg-[#00cfa1] transition-all text-xs font-semibold shadow"
+                >
+                  Inspect Payload
+                </button>
               </div>
 
               {Array.isArray(msg.payloads)
@@ -203,6 +211,22 @@ function App() {
         pauseOnHover
         theme="dark"
       />
+      {inspectedPayload && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-[#1e1e1e] p-6 rounded-lg max-w-2xl w-full shadow-lg relative text-white">
+            <button
+              onClick={() => setInspectedPayload(null)}
+              className="absolute top-2 right-2 text-sm text-gray-400 hover:text-white"
+            >
+              ✖
+            </button>
+            <h2 className="text-xl mb-4 font-bold text-[#00ffd1]">Payload Inspecionado</h2>
+            <pre className="overflow-auto max-h-[400px] bg-[#121212] p-4 rounded text-sm whitespace-pre-wrap">
+              {JSON.stringify(inspectedPayload, null, 2)}
+            </pre>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
