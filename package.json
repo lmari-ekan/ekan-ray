@@ -77,6 +77,11 @@
     ],
     "directories": {
       "buildResources": "resources"
-    }
+    },
+    "publish": [
+      {
+        "provider": "github"
+      }
+    ]
   }
 }
